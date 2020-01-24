@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from pkg_resources import get_distribution, DistributionNotFound
+from .data_clean import replace_dico, province_prefix, fosa_types, drop, name_formatter, split_names
 
 try:
     # Change here if project is renamed and does not equal the package name
