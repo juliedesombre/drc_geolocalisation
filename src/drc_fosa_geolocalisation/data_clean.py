@@ -153,11 +153,11 @@ def name_formatter(name, name_level):
     name = name.str.lower().replace(replace_dico["common"], regex=True ).replace(replace_dico[name_level], regex=True ).str.strip()
     return name
 
-def split_names(data, fosa_types, drop):
+def split_names(data, names, fosa_types, drop):
     type_pattern = '|'.join(fosa_types)
-    data["fosa_type"] = data.fosa.str.extract('('+type_pattern+')', expand=True)
-    data["fosa_name"] = data.fosa.str.replace(type_pattern, "")
+    data["fosa_type"] = data[names].str.extract('('+type_pattern+')', expand=True)
+    data["fosa_name"] = data[names].str.replace(type_pattern, "")
 
-    data = data[~(data.fosa.isin(drop))]
+    data = data[~(data[names].isin(drop))]
     data = data[~(data.fosa_name.isin(drop))]
     return data
