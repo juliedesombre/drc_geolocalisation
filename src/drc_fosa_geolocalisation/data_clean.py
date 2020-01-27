@@ -27,6 +27,11 @@ replace_dico = {"common":{
                     " dps":""
                     },
                 "zone":{
+                    'lolanga lolanga mampoko':"lolanga mampoko",
+                    'nyirangongo':"nyiragongo",
+                    'vuhuvi':'vuhovi',
+                    'nsona pangu':'nsona mpangu',
+                    'bena tshiadi':"bena tshadi",
                     'hors zone: tshiamilemba':"",
                     'mambre':"",
                     'divine':"",
