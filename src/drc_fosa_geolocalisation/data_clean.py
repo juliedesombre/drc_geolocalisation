@@ -19,6 +19,10 @@ replace_dico = {"common":{
                     "congo central":"kongo central",
                     "kasai occidental":"kasai",
                     " province":"",
+                    "orientale":"",
+                    "buele":"bas uele",
+                    "nordkivu":"nord kivu",
+                    "katanga":"haut katanga",
                     " dps":""
                     },
                 "zone":{
@@ -42,6 +46,7 @@ replace_dico = {"common":{
                     'mampoko':'lolanga mampoko',
                     " zone de sante":""
                     },
+                "aire":{},
                 "fosa":{
                     "centre de sante de reference":"centre de sante",
                     "hgr":"hopital general de reference",
