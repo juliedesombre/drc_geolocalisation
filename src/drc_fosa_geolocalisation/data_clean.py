@@ -22,7 +22,6 @@ replace_dico = {"common":{
                     "orientale":"",
                     "buele":"bas uele",
                     "nordkivu":"nord kivu",
-                    "katanga":"haut katanga",
                     " dps":""
                     },
                 "zone":{
@@ -71,6 +70,7 @@ replace_dico = {"common":{
                     "centre de hospitalier":"centre hospitalier",
                     "poste de de sante":"poste de sante",
                     "medical center":"centre medical",
+                    "health center":"centre de sante",
                     "cente de sante": "centre de sante",
                     " oste de sante": "poste de sante",
                     "cs": "centre de sante",
