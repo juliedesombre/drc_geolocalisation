@@ -25,7 +25,6 @@ replace_dico = {"common":{
                     " dps":""
                     },
                 "zone":{
-                    'masina':"",
                     'hors zone: tshiamilemba':"",
                     'mambre':"",
                     'divine':"",
