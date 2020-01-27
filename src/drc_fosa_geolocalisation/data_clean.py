@@ -3,6 +3,7 @@ import numpy as np
 import geopandas as gpd
 
 replace_dico = {"common":{
+                    "_":" ",
                     "-":" ",
                     "'":" ",
                     "ã¯":"i",
