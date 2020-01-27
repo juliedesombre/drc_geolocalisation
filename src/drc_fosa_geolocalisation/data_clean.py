@@ -25,6 +25,18 @@ replace_dico = {"common":{
                     " dps":""
                     },
                 "zone":{
+                    'masina':"",
+                    'hors zone: tshiamilemba':"",
+                    'mambre':"",
+                    'divine':"",
+                    'la police':'police',
+                    'benaleka':'bena leka',
+                    'mobayimbongo':'mobayi mbongo',
+                    'ndjoko punda':'ndjoko mpunda',
+                    'mwetshi':'muetshi',
+                    'wamba luadi':'wamba lwadi',
+                    'djalo djeka':'djalo ndjeka',
+                    'kisandji':'kisanji',
                     'ruashi':'rwashi',
                     'haut plateau':'hauts plateaux',
                     'kiambi':'kiyambi',
