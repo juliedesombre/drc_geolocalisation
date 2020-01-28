@@ -7,6 +7,7 @@ replace_dico = {"common":{
                     "-":" ",
                     "'":" ",
                     "ã¯":"i",
+                    "ï":"i"
                     " 1":" i",
                     " 2":" ii",
                     " 3":" iii",
@@ -20,6 +21,7 @@ replace_dico = {"common":{
                     "lulua":"kasai central",
                     "congo central":"kongo central",
                     "kasai occidental":"kasai",
+                    "iturie":"ituri"
                     " province":"",
                     "orientale":"",
                     "buele":"bas uele",
