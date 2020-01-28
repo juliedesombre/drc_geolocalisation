@@ -22,7 +22,7 @@ replace_dico = {"common":{
                     "lulua":"kasai central",
                     "congo central":"kongo central",
                     "kasai occidental":"kasai",
-                    "iturie":"ituri"
+                    "iturie":"ituri",
                     " province":"",
                     "orientale":"",
                     "buele":"bas uele",
