@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 
+#toto
+
 replace_dico = {"common":{
                     "_":" ",
                     "-":" ",
@@ -69,18 +71,25 @@ replace_dico = {"common":{
                 "aire":{},
                 "fosa":{
                     "centre de sante de reference":"centre de sante",
+                    "csr":"centre de sante",
                     "hgr":"hopital general de reference",
                     "general referencia":"hopital general de reference",
                     "centre hopital":"centre hospitalier",
+                    "cs":"centre de sante",
                     "poly clinique":"polyclinique",
                     "centre sante":"centre de sante",
                     "centre de de sante":"centre de sante",
                     "polyclinic":"polyclinique",
                     "polyclique":"polyclinique",
+                    "policlique":"polyclinique",
+                    "palyclinique":"polyclinique",
+                    "policlynique":"polyclinique",
+                    "clinic":"clinique",
                     "centre hospistalier":"centre hospitalier",
                     "centre de medical":"centre medical",
                     "centre de centre de reference": "centre de sante",
                     "a general de reference":"a hopital general de reference",
+                    "h?pital":"hopital",
                     "centre medico centre chirurgical":"centre medico chirurgical",
                     "poste sante":" poste de sante",
                     "centre hospital de reference":"hopital general de reference",
@@ -104,7 +113,21 @@ replace_dico = {"common":{
                     "babonde ch":"babonde centre hospitalier",
                     "butembo 3 ch":"butembo 3 centre hospitalier",
                     "mushenyi centre de":"mushenyi centre de sante",
-                    "de bangamba centre de sant":"de bangamba centre de sante"
+                    "de bangamba centre de sant":"de bangamba centre de sante",
+                    "ã‰":"e",
+                    "?":"e",
+                    "ste":"sainte",
+                    "st":"saint",
+                    "Centr?":"centre",
+                    "centr?":"centre",
+                    "ra©fa©rence":"reference",
+                    "maternita©":"maternite",
+                    "sant?":"sante",
+                    "santa‰":"sante",
+                    "santa©":"sante",
+                    "ra‰fa‰renc":"reference",
+                    "ra©ference":"reference",
+                    "solidarita©":"solidarite"
                     }
                 }
 
