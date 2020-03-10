@@ -29,6 +29,7 @@ replace_dico = {"common":{
                     "orientale":"",
                     "buele":"bas uele",
                     "nordkivu":"nord kivu",
+                    "katanga":"haut katanga",
                     " dps":""
                     },
                 "zone":{
@@ -58,14 +59,19 @@ replace_dico = {"common":{
                     'yalifafu':'yalifafo',
                     'busanga':'bosanga',
                     'citenge':'tshitenge',
+                    'tshilenge':'tshitenge',
                     'banzow moke':'banjow moke',
+                    "banjow moke":'banjow moke',
                     'mweneditu':'mwene ditu',
                     'kimbao':'kimbau',
                     'kabeya kamwanga':'kabeya kamuanga',
+                    'penjwa':'pendjwa',
                     'nyankunde':'nyakunde',
                     'gety':'gethy',
                     'mongbwalu':'mongbalu',
                     'mampoko':'lolanga mampoko',
+                    'bena tshiadi': 'bena tshadi',
+                    'nsona-pangu':'nsona mpangu',
                     " zone de sante":""
                     },
                 "aire":{},
@@ -142,66 +148,15 @@ drop = ["supprimer","structure a supprime","structure à supprime","to delete","
         "zone de sante kikwit nord","bureau central dela zone de sante rurale de nioki",
         'bureau central de la zone de sante rurale de mushie']
 
-def read_and_clean_carte_sanitaire(url):
-    colnames = ["country", "province", "zone", "fosa_drop" , "fosa", "resp","address","phone","level","dhis2_id","gps"]
-    carte_sanitaire = pd.read_excel(url, sheet_name = "Entités", 
-                                    names=colnames )
-    # Split GPS field  as separate Longitude and Latitude
-    gps_as_list = carte_sanitaire.gps.str.replace("\[|\]","").str.split(",")
-    carte_sanitaire["long"] = gps_as_list.apply(lambda x: x[0] if (type(x) is list ) is True else np.nan ).astype(float)
-    carte_sanitaire["lat"] = gps_as_list.apply(lambda x: x[1] if (type(x) is list ) is True else np.nan ).astype(float)
-    carte_sanitaire = carte_sanitaire.drop(["fosa_drop","resp","address","phone","level","gps","country"], axis=1)
-    # Create a geopandas DataFrame
-    carte_sanitaire = gpd.GeoDataFrame(carte_sanitaire[["province","zone","fosa","dhis2_id"]],
-                             geometry=gpd.points_from_xy(carte_sanitaire.long, carte_sanitaire.lat),crs={'init':'epsg:4326'})
-    # Format_names
-    levels = ["province", "zone", "fosa"]
-    for level in levels:
-        carte_sanitaire[level] = carte_sanitaire[level].str[3:]
-        carte_sanitaire[level] = name_formatter(carte_sanitaire[level], level)
-    carte_sanitaire = split_names(carte_sanitaire, fosa_types, drop)
-    return carte_sanitaire
 
 
-def read_and_clean_kemri_data(url):
-    colnames = ["country","province","fosa","fosa_type","ownership","lat","long","source"]
-    kemri_data = pd.read_excel(url, names=colnames)
-    # Subset only to DRC data
-    kemri_drc  = kemri_data[kemri_data.country == "Democratic Republic of the Congo"]
-    kemri_drc = kemri_drc.drop(["country"], axis=1)
-    # Create a unique index
-    kemri_drc["kemri_id"] = "km" + kemri_drc.index.astype(str)
-    # Create a geopandas DataFrame
-    kemri_drc = gpd.GeoDataFrame(kemri_drc[["province","fosa","kemri_id","fosa_type","ownership","source"]],
-                                           geometry=gpd.points_from_xy(kemri_drc.long, kemri_drc.lat),crs={'init':'epsg:4326'}
-                                            )
-    # Format_names
-    levels = ["province", "fosa"]
-    for level in levels:
-        kemri_drc[level] = name_formatter(kemri_drc[level], level)
-    kemri_drc.fosa[kemri_drc.fosa.str[0:3].isin(province_prefix)] = kemri_drc.fosa[kemri_drc.fosa.str[0:3].isin(province_prefix)].str[3:]
-    kemri_drc = split_names(kemri_drc, fosa_types, drop)
-    return (kemri_data, kemri_drc)
-
-def read_and_clean_zones_data(url, hierarchy):
-    zones = gpd.read_file(url)
-    zones.columns = ["zone_id","geometry"]
-    hierarchy = pd.read_csv(hierarchy)
-    hierarchy = hierarchy[hierarchy.level == 3]
-    hierarchy = hierarchy[["id","name","level_2_name"]]
-    hierarchy.columns = ["zone_id","zone","province"]
-    # Format_names
-    levels = ["province", "zone"]
-    for level in levels:
-        hierarchy[level] = hierarchy[level].str[3:]
-        hierarchy[level] = name_formatter(hierarchy[level], level)
-    zones = zones.merge(hierarchy)
-    return zones
 
 
-def name_formatter(name, name_level):
-    name = name.str.lower().replace(replace_dico["common"], regex=True ).replace(replace_dico[name_level], regex=True ).str.strip()
-    return name
+def name_formatter(data, names, name_level):
+    data[names] = data[names].str.lower().replace(replace_dico["common"], regex=True ).replace(replace_dico[name_level], regex=True ).str.strip()
+    data.loc[data[names].str[0:3].isin(province_prefix), names] = data.loc[data[names].str[0:3].isin(province_prefix), names].str[3:]
+    data.loc[data[names] == "", names] = None
+    return data
 
 def split_names(data, names, fosa_types, drop):
     type_pattern = '|'.join(fosa_types)
